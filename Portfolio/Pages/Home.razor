@@ -3,4 +3,17 @@
 <PageTitle>Bertrand Beaujard – Développeur C# / .NET</PageTitle>
 
 <h1>Bertrand Beaujard</h1>
-<p>Portfolio en construction.</p>
+
+@if (_projects is null)
+{
+    <p>Chargement…</p>
+}
+else
+{
+    <ul>
+        @foreach (var project in _projects)
+        {
+            <li>@project.Title — @project.Status</li>
+        }
+    </ul>
+}
