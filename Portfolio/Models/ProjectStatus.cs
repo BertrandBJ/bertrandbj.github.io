@@ -1,3 +1,11 @@
+using System.Text.Json.Serialization;
+
 namespace Portfolio.Models;
 
-public record ProjectStatus();
+[JsonConverter(typeof(JsonStringEnumConverter<ProjectStatus>))]
+public enum ProjectStatus
+{
+    Done,
+    InProgress,
+    Concept
+}

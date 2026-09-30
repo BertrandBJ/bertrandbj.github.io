@@ -1,0 +1,134 @@
+[
+  {
+    "slug": "schmidt",
+    "title": "Schmidt Groupe",
+    "period": "2025 – 2026",
+    "status": "Done",
+    "teamSize": 5,
+    "shortDescription": "Application interne de gestion de stock et de distribution de matériel aux postes de production, développée sur le socle technique de l'entreprise.",
+    "sections": [
+      {
+        "title": "Contexte",
+        "text": "Projet client réalisé à l'UHA 4.0 pour Schmidt Groupe, fabricant de mobilier. Le besoin : un outil interne pour gérer le stock et la distribution de matériel aux postes de production. La contrainte : partir du socle technique existant de l'entreprise."
+      },
+      {
+        "title": "Ce que j'ai réalisé",
+        "items": [
+          "Modélisation et gestion des données avec Entity Framework Core sur SQL Server (migrations, jeu de données initial)",
+          "Fonctionnalités CRUD de bout en bout : API ASP.NET Core, contrôleurs, DTO, formulaires Blazor",
+          "Recueil des besoins lors d'une visite du site de production, puis tests de validation sur place avec un gestionnaire de stock"
+        ]
+      },
+      {
+        "title": "Difficulté et solution",
+        "text": "En fin de projet, une partie du code s'écartait des conventions du socle imposé. Je l'ai reprise pour la remettre en conformité, afin que l'application reste maintenable par les équipes de l'entreprise."
+      }
+    ],
+    "technologies": [".NET 8", "Blazor WebAssembly", "ASP.NET Core", "Entity Framework Core", "SQL Server"],
+    "order": 1
+  },
+  {
+    "slug": "tms2000",
+    "title": "TMS2000",
+    "period": "2026 – 2027",
+    "status": "InProgress",
+    "role": "Projet individuel",
+    "teamSize": 1,
+    "shortDescription": "Jeu mobile de trading de ressources sur Android : les cours fluctuent chaque heure, et un administrateur régule le marché. Fonctionne aussi hors ligne, avec synchronisation automatique.",
+    "sections": [
+      {
+        "title": "Contexte",
+        "text": "Projet fil rouge individuel de 3e année à l'UHA 4.0, mené à partir d'un cahier des charges imposé : application mobile, API, base NoSQL, deux rôles utilisateurs, et interdiction de se limiter à un simple CRUD."
+      },
+      {
+        "title": "Le concept",
+        "text": "Un jeu de marché inspiré du mini-jeu boursier de Cookie Clicker. Le prix des ressources évolue chaque heure, et le joueur achète et revend au bon moment. L'administrateur ne valide pas les transactions : il joue le rôle de régulateur du marché, en gelant des ressources ou en déclenchant des événements."
+      },
+      {
+        "title": "L'architecture",
+        "text": "Une application Android en .NET MAUI consomme une API ASP.NET Core, adossée à MongoDB, le tout conteneurisé avec Docker. Le téléphone embarque une base locale SQLite qui se synchronise dans les deux sens avec MongoDB à la reconnexion, et il permet de se connecter même sans Internet."
+      },
+      {
+        "title": "La démarche",
+        "text": "Conception d'abord : cahier des charges, diagrammes UML, user stories et maquettes. Puis tests d'intégration pour chaque user story, pipeline CI/CD et authentification par token avec protection des routes."
+      }
+    ],
+    "technologies": [".NET MAUI", "C#", "ASP.NET Core", "MongoDB", "SQLite", "Docker", "GitLab CI/CD"],
+    "order": 2
+  },
+  {
+    "slug": "plateforme-rh",
+    "title": "Plateforme d'enquêtes RH",
+    "period": "2026",
+    "status": "Done",
+    "role": "Scrum Master",
+    "teamSize": 5,
+    "shortDescription": "SaaS d'enquêtes RH pour un entrepreneur : reprise d'une première version, refonte des rôles et de l'administration. Scrum Master d'une équipe de 5.",
+    "sections": [
+      {
+        "title": "Contexte",
+        "text": "Projet client pour un ancien responsable RH qui souhaite commercialiser sa plateforme d'enquêtes. Nous avons repris une première version développée par une autre équipe."
+      },
+      {
+        "title": "Ce que j'ai réalisé",
+        "items": [
+          "Refonte du système de rôles : ajout d'un niveau administrateur société et des restrictions d'accès associées",
+          "Interfaces d'administration : sociétés, administrateurs, bibliothèques de questions globale et par société, avec une confirmation par saisie de « SUPPRIMER » avant toute suppression",
+          "Parcours complet de réinitialisation de mot de passe par e-mail",
+          "Règles métier sur la notation des questions"
+        ]
+      },
+      {
+        "title": "Difficulté et solution",
+        "text": "L'équipe précédente avait abandonné les migrations Prisma : il fallait synchroniser à la main un script SQL et le schéma Prisma à chaque évolution de la base."
+      }
+    ],
+    "technologies": ["TypeScript", "Next.js", "NestJS", "PostgreSQL", "Prisma", "Docker"],
+    "order": 3
+  },
+  {
+    "slug": "hopla-cup",
+    "title": "HoplaCup",
+    "period": "2025",
+    "status": "Done",
+    "teamSize": 5,
+    "shortDescription": "Plugin WordPress d'administration pour un tournoi international de water-polo jeunes : gestion des inscriptions d'équipes.",
+    "sections": [
+      {
+        "title": "Contexte",
+        "text": "Mon premier projet de formation, pour le comité d'organisation bénévole de la HoplaCup, un tournoi international de water-polo jeunes organisé à Mulhouse, qui accueille des équipes de France, de Suisse et d'Allemagne."
+      },
+      {
+        "title": "Ce que j'ai réalisé",
+        "text": "Un plugin WordPress d'administration pour gérer les inscriptions d'équipes (CRUD), avec des interfaces en HTML, CSS et JavaScript natif."
+      },
+      {
+        "title": "Ce que j'en retiens",
+        "text": "Je l'ai entièrement codé sans assistant IA. C'était plus lent, mais c'est ce qui m'a donné des bases solides : comprendre ce que fait chaque ligne, plutôt que de la faire générer."
+      }
+    ],
+    "technologies": ["PHP", "JavaScript", "HTML/CSS", "WordPress", "SQL"],
+    "order": 4
+  },
+  {
+    "slug": "braintorio",
+    "title": "Braintorio",
+    "period": "2026",
+    "status": "Concept",
+    "role": "Projet personnel",
+    "teamSize": 1,
+    "shortDescription": "Mod pour Factorio où le joueur incarne le corps de l'ingénieur et invente de nouveaux objets en s'appuyant sur l'analyse dimensionnelle, assemblez des mètres pour faire des m² ou divisez par du temps pour faire une vitesse. ",
+    "sections": [
+      {
+        "title": "Pourquoi ce projet",
+        "text": "Il réunit mes deux cultures : la physique et la chimie de mon premier métier, et le développement. C'est aussi un défi d'apprentissage en autonomie : un nouveau langage (Lua) et une API que je n'avais jamais utilisés."
+      },
+      {
+        "title": "Comment fonctionne un mod Factorio",
+        "text": "Le jeu charge le mod en deux temps. Pendant la phase data, on déclare les objets, les recettes et les technologies (des « prototypes »). Pendant la phase control, des scripts réagissent aux événements de la partie. S'ajoutent les fichiers de traduction et un manifeste (info.json)."
+      }
+    ],
+    "technologies": ["Lua", "API de modding Factorio"],
+    "order": 5
+  }
+]
