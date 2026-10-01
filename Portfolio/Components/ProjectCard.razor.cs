@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Portfolio.Models;
-
+using Portfolio.Extensions;
 namespace Portfolio.Components;
 
 public partial class ProjectCard
@@ -14,19 +14,5 @@ public partial class ProjectCard
 
     private bool ShowStatus => Project.Status != ProjectStatus.Done;
 
-    private string MetaLine // data en plus comme : period/role/teamsize.
-    {
-        get
-        {
-            var parts = new List<string> { Project.Period };
-
-            if (!string.IsNullOrWhiteSpace(Project.Role))
-                parts.Add(Project.Role); // check si project.role est null/vide/whitespace, si ce n'est pas le cas => add à parts.
-
-            if (Project.TeamSize is > 1)
-                parts.Add($"équipe de {Project.TeamSize}"); 
-
-            return string.Join(" - ", parts);
-        }
-    }
+    private string MetaLine => Project.ToMetaLine(); // from l'extension.
 }
