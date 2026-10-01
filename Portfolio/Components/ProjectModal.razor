@@ -1,0 +1,79 @@
+<div class="project-modal-backdrop" @onclick="RequestClose">
+    <div class="project-modal"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="modal-title"
+         tabindex="-1"
+         @ref="_dialog"
+         @onclick:stopPropagation="true"
+         @onkeydown="HandleKeyDown">
+
+        <button class="project-modal-close"
+                type="button" 
+                aria-label="Fermer" 
+                @onclick="RequestClose">×</button>
+
+        <header>
+            <p class="project-meta">@MetaLine</p>
+            <h2 id="modal-title">
+                @Project.Title
+                @if (ShowStatus)
+                {
+                    <span class="project-status">@Project.Status.ToLabel()</span>
+                }
+            </h2>
+            <p class="project-lead">@Project.ShortDescription</p>
+        </header>
+
+        @if (HasImage)
+        {
+            <img class="modal-image" src="@Project.ImagePath" alt="@Project.ImageAlt" />
+        }
+
+        @foreach (var projectSection in Project.Sections)
+        {
+            <section @key="projectSection.Title">
+                <h3>@projectSection.Title</h3>
+
+                @if (!string.IsNullOrWhiteSpace(projectSection.Text))
+                {
+                    <p>@projectSection.Text</p>
+                }
+
+                @if (projectSection.Items.Count > 0)
+                {
+                    <ul>
+                        @foreach (var item in projectSection.Items)
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+                }
+            </section>
+        }
+
+        <section>
+            <h3>Technologies</h3>
+            <ul class="project-techs">
+                @foreach (var tech in Project.Technologies)
+                {
+                    <li><TechBadge Name="@tech" /></li>
+                }
+            </ul>
+        </section>
+
+        @if (Project.RepoUrl is not null || Project.LiveUrl is not null)
+        {
+            <section class="project-links">
+                @if (Project.RepoUrl is not null)
+                {
+                    <a href="@Project.RepoUrl" target="_blank" rel="noopener">Voir le code</a>
+                }
+                @if (Project.LiveUrl is not null)
+                {
+                    <a href="@Project.LiveUrl" target="_blank" rel="noopener">Voir le site</a>
+                }
+            </section>
+        }
+    </div>
+</div>

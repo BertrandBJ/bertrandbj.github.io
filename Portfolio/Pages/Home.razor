@@ -1,6 +1,7 @@
 @page "/"
+@page "/projets/{Slug}"
 
-<PageTitle>Bertrand Beaujard – Développeur full stack C# / .NET</PageTitle>
+<PageTitle>@PageTitleText</PageTitle>
 
 <header class="hero">
     <h1>Bertrand Beaujard</h1>
@@ -98,4 +99,11 @@
         <li><a href="mailto:bertrand.beaujard@gmail.com">bertrand.beaujard@gmail.com</a></li>
         <li><a href="https://github.com/BertrandBJ" target="_blank" rel="noopener">GitHub</a></li>
     </ul>
+    
+    @if (_selectedProject is not null)
+    {
+        <ProjectModal @key="_selectedProject.Slug"
+                      Project="@_selectedProject"
+                      OnClose="CloseModal" />
+    }
 </section>
