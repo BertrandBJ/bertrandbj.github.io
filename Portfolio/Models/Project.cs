@@ -9,6 +9,7 @@ public record Project
     public string? Role { get; init; }
     public int? TeamSize { get; init; }
     public required string ShortDescription { get; init; }
+    
     public IReadOnlyList<ProjectSection> Sections { get; init; } = [];
     public IReadOnlyList<string> Technologies { get; init; } = [];
     public string? ImagePath { get; init; }
