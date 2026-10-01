@@ -1,0 +1,37 @@
+<article class="project-card">
+    
+    @if (HasImage)
+    {
+        <img class="project-card-image" 
+             src="@Project.ImagePath" 
+             alt="@Project.ImageAlt" 
+             loading="lazy"/>
+    }
+
+    <div class="project-card-body">
+        
+        <p class="project-card-meta">@MetaLine</p>
+
+        <h3 class="project-card-title">
+            @Project.Title
+            
+            @if (ShowStatus)
+            {
+                <span class="project-status"> @Project.Status.ToLabel()</span>
+            }
+        </h3>
+
+        <p>@Project.ShortDescription</p>
+
+        <ul class="project-card-techs">
+            @foreach (var tech in Project.Technologies)
+            {
+                <li><TechBadge Name="@tech"/></li>
+            }
+        </ul>
+
+        <a class="project-card-link" 
+           href="@DetailUrl">Voir le projet</a>
+        
+    </div>
+</article>

@@ -1,19 +1,23 @@
 @page "/"
 
-<PageTitle>Bertrand Beaujard – Développeur C# / .NET</PageTitle>
+<PageTitle>Bertrand Beaujard – Développeur full stack C# / .NET</PageTitle>
 
 <h1>Bertrand Beaujard</h1>
 
-@if (_projects is null)
-{
-    <p>Chargement…</p>
-}
-else
-{
-    <ul>
-        @foreach (var project in _projects)
-        {
-            <li>@project.Title — @project.Status</li>
-        }
-    </ul>
-}
+<section id="projets">
+    <h2>Projets</h2>
+
+    @if (_projects is null)
+    {
+        <p>Chargement…</p>
+    }
+    else
+    {
+        <div class="project-grid">
+            @foreach (var project in _projects)
+            {
+                <ProjectCard @key="project.Slug" Project="@project" />
+            }
+        </div>
+    }
+</section>
