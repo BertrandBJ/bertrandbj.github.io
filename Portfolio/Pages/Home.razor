@@ -29,8 +29,7 @@
 </header>
 
 <section id="a-propos">
-    <p class="section-label">01 / À propos</p>
-    <h2>À propos</h2>
+    <h2 class="section-title">01 / À propos</h2>
 
     <p>
         Pendant cinq ans, j'ai été technicien supérieur en biotechnologie industrielle, chez OLEON puis à la SAS PIVERT,
@@ -62,9 +61,8 @@
 </section>
 
 <section id="projets">
-    <p class="section-label">02 / Projets</p>
-    <h2>Projets</h2>
-
+    <h2 class="section-title">02 / Projets</h2>
+    
     @if (_projects is null)
     {
         <p>Chargement…</p>
@@ -82,8 +80,7 @@
 
 <section id="competences">
     
-    <p class="section-label">03 / Compétences</p>
-    <h2>Compétences</h2>
+    <h2 class="section-title">03 / Compétences</h2>
 
     <div class="skill-groups">
         @foreach (var group in SkillGroups)
@@ -102,9 +99,7 @@
 </section>
 
 <section id="contact">
-    
-    <p class="section-label">04 / Contact</p>
-    <h2>Contact</h2>
+    <h2 class="section-title">04 / Contact</h2>
 
     <div class="contact-panel">
         <p>Vous cherchez un stagiaire .NET, ou sur un autre langage ou framework, pour janvier 2027 ? Écrivez-moi.</p>
