@@ -55,8 +55,18 @@ public partial class Home
 
     protected override async Task OnParametersSetAsync()
     {
-        _scrollToRestore = await JS.InvokeAsync<double>("portfolioScroll.getY");
-        
+        var currentUri = new Uri(Navigation.Uri);
+        bool hasAnchor = !string.IsNullOrEmpty(currentUri.Fragment);
+
+        if (hasAnchor)
+        {
+            _scrollToRestore = null;
+        }
+        else
+        {
+            _scrollToRestore = await JS.InvokeAsync<double>("portfolioScroll.getY");
+        }
+
         if (string.IsNullOrWhiteSpace(Slug))
         {
             _selectedProject = null;
@@ -66,7 +76,9 @@ public partial class Home
         _selectedProject = await ProjectService.GetBySlugAsync(Slug);
 
         if (_selectedProject is null)
+        {
             Navigation.NavigateTo("", replace: true);
+        }
     }
     
     protected override async Task OnAfterRenderAsync(bool firstRender)
