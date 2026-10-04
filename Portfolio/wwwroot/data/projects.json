@@ -116,6 +116,15 @@
         "text": "Je l'ai entièrement codé sans assistant IA. C'était plus lent, mais c'est ce qui m'a donné des bases solides : comprendre ce que fait chaque ligne, plutôt que de la faire générer."
       }
     ],
+    "images": [
+
+      {"path": "images/projects/HoplaCup/logo_hopla.webp", "alt": "logo de la hoplaCup"},
+      {"path": "images/projects/HoplaCup/image_hopla1.webp", "alt": "Page menu gestion partie administrateur"},
+      {"path": "images/projects/HoplaCup/image_hopla2.webp", "alt": "page de notification pour l'administrateur"},
+      {"path": "images/projects/HoplaCup/image_hopla3.webp", "alt": "Page de gestion des équipes pour les utilisateurs"},
+      { "path": "images/projects/HoplaCup/image_hopla4.webp", "alt": "architecture BBD"}
+
+    ],
     "technologies": ["PHP", "JavaScript", "HTML/CSS", "WordPress", "SQL"],
     "order": 4
   },
@@ -136,6 +145,12 @@
         "title": "Comment fonctionne un mod Factorio",
         "text": "Le jeu charge le mod en deux temps. Pendant la phase data, on déclare les objets, les recettes et les technologies (des « prototypes »). Pendant la phase control, des scripts réagissent aux événements de la partie. S'ajoutent les fichiers de traduction et un manifeste (info.json)."
       }
+    ],
+
+    "images": [
+
+      {"path": "images/projects/Braintorio/logo_Brain.webp", "alt": "logo de Braintorio"}
+      
     ],
     "technologies": ["Lua", "API de modding Factorio"],
     "order": 5
