@@ -11,4 +11,12 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.31" PrivateAssets="all" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\projects\Braintorio\" />
+    <Folder Include="wwwroot\images\projects\HoplaCup\" />
+    <Folder Include="wwwroot\images\projects\SCHMIDT\" />
+    <Folder Include="wwwroot\images\projects\TMS2000\" />
+    <Folder Include="wwwroot\images\projects\YourRHway\" />
+  </ItemGroup>
+
 </Project>

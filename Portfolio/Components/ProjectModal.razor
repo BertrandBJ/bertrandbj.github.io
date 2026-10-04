@@ -26,16 +26,41 @@
             <p class="project-lead">@Project.ShortDescription</p>
         </header>
 
-        @if (Project.Images.Count > 0)
+        @if (CurrentImage is not null)
         {
             <div class="project-modal-gallery">
-                @foreach (var image in Project.Images)
+                <img class="gallery-image" 
+                     src="@CurrentImage.Path" 
+                     alt="@CurrentImage.Alt" />
+
+                @if (HasMultipleImages)
                 {
-                    <img src="@image.Path"
-                         alt="@image.Alt"
-                         loading="lazy"/>
+                    <button type="button" 
+                            class="gallery-button gallery-button--prev"
+                            aria-label="Image précédente" 
+                            @onclick="ShowPreviousImage">‹</button>
+                    
+                    <button type="button" 
+                            class="gallery-button gallery-button--next"
+                            aria-label="Image suivante"
+                            @onclick="ShowNextImage">›</button>
                 }
             </div>
+
+            @if (HasMultipleImages)
+            {
+                <div class="gallery-dots">
+                    @for (int i = 0; i < _galleryImages.Count; i++)
+                    {
+                        int index = i;
+                        <button type="button" 
+                                class="@DotCssClass(index)"
+                                aria-label="Afficher l'image @(index + 1)"
+                                @onclick="() => ShowImage(index)"></button>
+                    }
+                    <span class="gallery-counter">@(_currentImageIndex + 1) / @_galleryImages.Count</span>
+                </div>
+            }
         }
 
         @foreach (var projectSection in Project.Sections)
