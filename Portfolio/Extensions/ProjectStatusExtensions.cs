@@ -10,4 +10,9 @@ public static class ProjectStatusExtensions
         ProjectStatus.Concept => "En conception",
         _ => status.ToString()
     };  
+    
+    public static string ToCssClass(this ProjectStatus status)
+    {
+        return "project-status--" + status.ToString().ToLowerInvariant();
+    }
 }

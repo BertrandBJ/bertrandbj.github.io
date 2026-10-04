@@ -19,15 +19,22 @@
                 @Project.Title
                 @if (ShowStatus)
                 {
-                    <span class="project-status">@Project.Status.ToLabel()</span>
+                    <span class="project-status @StatusCssClass">@Project.Status.ToLabel()</span>
                 }
             </h2>
             <p class="project-lead">@Project.ShortDescription</p>
         </header>
 
-        @if (HasImage)
+        @if (Project.Images.Count > 0)
         {
-            <img class="modal-image" src="@Project.ImagePath" alt="@Project.ImageAlt" />
+            <div class="project-modal-gallery">
+                @foreach (var image in Project.Images)
+                {
+                    <img src="@image.Path" 
+                         alt="@image.Alt" 
+                         loading="lazy" />
+                }
+            </div>
         }
 
         @foreach (var projectSection in Project.Sections)
@@ -62,18 +69,19 @@
             </ul>
         </section>
 
-        @if (Project.RepoUrl is not null || Project.LiveUrl is not null)
+        @if (Project.RepoUrl is not null)
         {
-            <section class="project-links">
-                @if (Project.RepoUrl is not null)
-                {
-                    <a href="@Project.RepoUrl" target="_blank" rel="noopener">Voir le code</a>
-                }
-                @if (Project.LiveUrl is not null)
-                {
-                    <a href="@Project.LiveUrl" target="_blank" rel="noopener">Voir le site</a>
-                }
-            </section>
+            <a class="button button-primary" 
+               href="@Project.RepoUrl" 
+               target="_blank" rel="noopener">Voir le code</a>
         }
+        @if (Project.LiveUrl is not null)
+        {
+            <a class="button button-secondary" 
+               href="@Project.LiveUrl" 
+               target="_blank" 
+               rel="noopener">Voir le site</a>
+        }
+
     </div>
 </div>

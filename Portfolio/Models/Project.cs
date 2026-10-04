@@ -12,9 +12,10 @@ public record Project
     
     public IReadOnlyList<ProjectSection> Sections { get; init; } = [];
     public IReadOnlyList<string> Technologies { get; init; } = [];
-    public string? ImagePath { get; init; }
-    public string? ImageAlt { get; init; }
+    
+    public IReadOnlyList<ProjectImage> Images { get; init; } = [];
     public string? RepoUrl { get; init; }
     public string? LiveUrl { get; init; }
     public int Order { get; init; }
+    
 }

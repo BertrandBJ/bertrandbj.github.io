@@ -1,13 +1,20 @@
 <article class="project-card">
     
-    @if (HasImage)
+    @if (CoverImage is not null)
     {
         <img class="project-card-image" 
-             src="@Project.ImagePath" 
-             alt="@Project.ImageAlt" 
-             loading="lazy"/>
+             src="@CoverImage.Path"
+             alt="@CoverImage.Alt" 
+             loading="lazy" />
     }
-
+    else
+    {
+        <div class="project-card-placeholder" 
+             aria-hidden="true">
+            <span>@Project.Slug</span>
+        </div>
+    }
+    
     <div class="project-card-body">
 
         <h3 class="project-card-title">
@@ -15,7 +22,7 @@
             
             @if (ShowStatus)
             {
-                <span class="project-status"> @Project.Status.ToLabel()</span>
+                <span class="project-status @StatusCssClass">@Project.Status.ToLabel()</span>
             }
         </h3>
 
@@ -29,11 +36,11 @@
         </ul>
 
         <p class="project-card-meta">@MetaLine</p>
-        
-        <a class="project-card-link" 
+
+        <a class="project-card-link"
            href="@DetailUrl">Voir le projet</a>
         
     </div>
-    <!--Affichage des projets avec description + ajout des TechDadge dedans, va service pour l'overview des diff projet que j'ai fait. p-e delete le status -->
+    <!--Affichage des projets avec description + ajout des TechBadge dedans, va service pour l'overview des diff projet que j'ai fait. p-e delete le status -->
 </article>
 

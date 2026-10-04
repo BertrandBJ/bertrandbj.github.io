@@ -10,9 +10,22 @@ public partial class ProjectCard
 
     private string DetailUrl => $"projets/{Project.Slug}";
 
-    private bool HasImage => !string.IsNullOrWhiteSpace(Project.ImagePath);
+    private ProjectImage? CoverImage
+    {
+        get
+        {
+            if (Project.Images.Count > 0)
+            {
+                return Project.Images[0];
+            }
 
+            return null;
+        }
+    }
+
+    private string StatusCssClass => Project.Status.ToCssClass();
     private bool ShowStatus => Project.Status != ProjectStatus.Done;
 
     private string MetaLine => Project.ToMetaLine(); // from l'extension.
+    
 }

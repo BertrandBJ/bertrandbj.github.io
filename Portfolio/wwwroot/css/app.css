@@ -36,6 +36,7 @@
 html {
     scroll-behavior: smooth;
     scroll-padding-top: calc(var(--header-height) + 1rem);
+    scrollbar-gutter: stable;
 }
 
 body {
@@ -160,46 +161,101 @@ img {
                                                                  Composants globaux
                                             ========================================================= */
 .section-label {
-margin: 0 0 0.5rem;
-color: var(--color-accent);
-font-family: var(--font-mono);
-font-size: 0.85rem;
-letter-spacing: 0.1em;
-text-transform: uppercase;
+    margin: 0 0 0.5rem;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
 }
 
 .button {
-display: inline-block;
-padding: 0.75rem 1.5rem;
-border: 1px solid var(--color-accent);
-font-family: var(--font-mono);
-font-size: 0.9rem;
-letter-spacing: 0.05em;
-text-transform: uppercase;
-clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
-transition: background-color 0.15s ease, color 0.15s ease;
-}
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+    transition: background-color 0.15s ease, color 0.15s ease;
+    }
 
 .button:hover {
-text-decoration: none;
+    text-decoration: none;
 }
 
 .button-primary {
-background: var(--color-accent);
-color: var(--color-bg);
+    background: var(--color-accent);
+    color: var(--color-bg);
 }
 
 .button-primary:hover {
-background: var(--color-accent-strong);
-color: var(--color-bg);
+    background: var(--color-accent-strong);
+    color: var(--color-bg);
 }
 
 .button-secondary {
-background: transparent;
-color: var(--color-accent);
+    background: var(--color-surface-raised);
+    border-color: transparent;
+    color: var(--color-accent);
 }
 
 .button-secondary:hover {
-background: var(--color-accent-soft);
-color: var(--color-accent-strong);
+    background: var(--color-accent-soft);
+    color: var(--color-accent-strong);
+}
+                                            /* =========================================================
+                                                          Voyant de statut
+                                            ========================================================= */
+                                            
+.project-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+.project-status::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.project-status--inprogress {
+    color: var(--color-accent);
+}
+
+.project-status--inprogress::before {
+    animation: status-pulse 1.8s ease-in-out infinite;
+}
+
+.project-status--concept {
+    color: var(--color-text-muted);
+}
+
+@keyframes status-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+@keyframes modal-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes modal-slide-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+body:has(.project-modal-backdrop) {
+    overflow: hidden;
 }

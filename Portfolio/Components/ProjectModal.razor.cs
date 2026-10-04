@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Portfolio.Extensions;
 using Portfolio.Models;
-
 namespace Portfolio.Components;
 
 public partial class ProjectModal
@@ -19,7 +18,7 @@ public partial class ProjectModal
 
     private bool ShowStatus => Project.Status != ProjectStatus.Done;
 
-    private bool HasImage => !string.IsNullOrWhiteSpace(Project.ImagePath);
+    private string StatusCssClass => Project.Status.ToCssClass();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
