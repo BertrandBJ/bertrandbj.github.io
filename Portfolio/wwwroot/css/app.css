@@ -155,3 +155,51 @@ img {
 .loading-progress-text::after {
     content: var(--blazor-load-percentage-text, "Chargement");
 }
+
+                                            /* =========================================================
+                                                                 Composants globaux
+                                            ========================================================= */
+.section-label {
+margin: 0 0 0.5rem;
+color: var(--color-accent);
+font-family: var(--font-mono);
+font-size: 0.85rem;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+}
+
+.button {
+display: inline-block;
+padding: 0.75rem 1.5rem;
+border: 1px solid var(--color-accent);
+font-family: var(--font-mono);
+font-size: 0.9rem;
+letter-spacing: 0.05em;
+text-transform: uppercase;
+clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.button:hover {
+text-decoration: none;
+}
+
+.button-primary {
+background: var(--color-accent);
+color: var(--color-bg);
+}
+
+.button-primary:hover {
+background: var(--color-accent-strong);
+color: var(--color-bg);
+}
+
+.button-secondary {
+background: transparent;
+color: var(--color-accent);
+}
+
+.button-secondary:hover {
+background: var(--color-accent-soft);
+color: var(--color-accent-strong);
+}

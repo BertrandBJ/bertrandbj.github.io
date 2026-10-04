@@ -4,6 +4,7 @@
 <PageTitle>@PageTitleText</PageTitle>
 
 <header class="hero">
+    <p class="section-label">Portfolio</p>
     <h1>Bertrand Beaujard</h1>
     <p class="hero-title">Développeur full stack C# / .NET en formation</p>
     <p class="hero-subtitle">
@@ -13,17 +14,22 @@
     <ul class="hero-techs">
         @foreach (var tech in HeroTechnologies)
         {
-            <li><TechBadge Name="@tech" /></li>
+            <li><TechBadge Name="@tech"/></li>
         }
     </ul>
 
     <div class="hero-actions">
-        <a href="#projets">Voir mes projets</a>
-        <a href="#contact">Me contacter</a>
+
+        <a class="button button-primary"
+           href="#projets">Voir mes projets</a>
+
+        <a class="button button-secondary"
+           href="#contact">Me contacter</a>
     </div>
 </header>
 
 <section id="a-propos">
+    <p class="section-label">01 / À propos</p>
     <h2>À propos</h2>
 
     <p>
@@ -56,6 +62,7 @@
 </section>
 
 <section id="projets">
+    <p class="section-label">02 / Projets</p>
     <h2>Projets</h2>
 
     @if (_projects is null)
@@ -67,13 +74,14 @@
         <div class="project-grid">
             @foreach (var project in _projects)
             {
-                <ProjectCard @key="project.Slug" Project="@project" />
+                <ProjectCard @key="project.Slug" Project="@project"/>
             }
         </div>
     }
 </section>
 
 <section id="competences">
+    <p class="section-label">03 / Compétences</p>
     <h2>Compétences</h2>
 
     <div class="skill-groups">
@@ -84,7 +92,7 @@
                 <ul>
                     @foreach (var skill in group.Skills)
                     {
-                        <li><TechBadge Name="@skill" /></li>
+                        <li><TechBadge Name="@skill"/></li>
                     }
                 </ul>
             </div>
@@ -93,17 +101,18 @@
 </section>
 
 <section id="contact">
+    <p class="section-label">04 / Contact</p>
     <h2>Contact</h2>
     <p>Vous cherchez un stagiaire .NET, ou sur un autre langage ou framework, pour janvier 2027 ? Écrivez-moi.</p>
     <ul>
         <li><a href="mailto:bertrand.beaujard@gmail.com">bertrand.beaujard@gmail.com</a></li>
         <li><a href="https://github.com/BertrandBJ" target="_blank" rel="noopener">GitHub</a></li>
     </ul>
-    
+
     @if (_selectedProject is not null)
     {
         <ProjectModal @key="_selectedProject.Slug"
                       Project="@_selectedProject"
-                      OnClose="CloseModal" />
+                      OnClose="CloseModal"/>
     }
 </section>
