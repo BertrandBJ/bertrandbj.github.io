@@ -3,12 +3,10 @@
     margin-top: 2rem;
     padding: clamp(2rem, 6vw, 4rem);
     background-color: var(--color-surface);
-    background-image:
-            linear-gradient(rgba(242, 140, 40, 0.07) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(242, 140, 40, 0.07) 1px, transparent 1px);
+    background-image: var(--blueprint-grid);
     background-size: 24px 24px;
     border: 1px solid var(--color-border);
-    border-top-color: var(--color-border-light);
+    border-top: 2px solid var(--color-accent);
     clip-path: polygon(
             var(--chamfer) 0, 100% 0,
             100% calc(100% - var(--chamfer)), calc(100% - var(--chamfer)) 100%,
@@ -52,20 +50,15 @@ section {
     padding: 5rem 0 0;
 }
 
-section h2 {
-    margin-bottom: 2rem;
-}
-
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
     gap: 1.5rem;
 }
 
-
-#a-propos p,
-#a-propos ul {
-    max-width: 65ch;
+.about-panel {
+    max-width: 42rem;
+    margin: 0 auto;
 }
 
 #a-propos li::marker {
@@ -81,9 +74,11 @@ section h2 {
 
 .skill-group {
     padding: 1.5rem;
-    background: var(--color-surface);
+    background-color: var(--color-surface);
+    background-image: var(--blueprint-grid);
+    background-size: 20px 20px;
     border: 1px solid var(--color-border);
-    border-top-color: var(--color-border-light);
+    border-top: 2px solid var(--color-accent);
     clip-path: polygon(
             var(--chamfer) 0, 100% 0,
             100% calc(100% - var(--chamfer)), calc(100% - var(--chamfer)) 100%,
@@ -113,9 +108,7 @@ section h2 {
 .contact-panel {
     padding: clamp(1.5rem, 4vw, 2.5rem);
     background-color: var(--color-surface);
-    background-image:
-            linear-gradient(rgba(242, 140, 40, 0.07) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(242, 140, 40, 0.07) 1px, transparent 1px);
+    background-image: var(--blueprint-grid);
     background-size: 24px 24px;
     border: 1px solid var(--color-border);
     border-top: 2px solid var(--color-accent);
@@ -143,4 +136,8 @@ section h2 {
     color: var(--color-text-muted);
     font-family: var(--font-mono);
     font-size: 0.9rem;
+}
+
+.about-panel > :last-child {
+    margin-bottom: 0;
 }

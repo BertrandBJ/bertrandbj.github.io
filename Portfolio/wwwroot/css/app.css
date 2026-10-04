@@ -1,5 +1,5 @@
                                             /* =========================================================
-                                               Variables : toutes les couleurs et mesures du site
+                                                                     Variables : root
                                                ========================================================= */
 :root {
     --color-bg: #121418;
@@ -7,7 +7,7 @@
     --color-surface-raised: #222833;
     --color-border: #2e3542;
     --color-border-light: #3d4555;
-
+    
     --color-text: #e6e8eb;
     --color-text-muted: #9aa3af;
 
@@ -15,13 +15,18 @@
     --color-accent-strong: #ffa24d;
     --color-accent-soft: rgba(242, 140, 40, 0.12);
 
+    --blueprint-grid:
+            linear-gradient(rgba(242, 140, 40, 0.07) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(242, 140, 40, 0.07) 1px, transparent 1px);
+
     --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    
     --font-mono: "JetBrains Mono", "Cascadia Code", "Fira Code", ui-monospace, Consolas, monospace;
 
     --content-width: 72rem;
     --header-height: 4rem;
     --chamfer: 12px;
+
+    /* Mises à jour par Blazor pendant le chargement */
     --blazor-load-percentage: 0%;
     --blazor-load-percentage-text: "";
 }
@@ -135,9 +140,7 @@ img {
     justify-content: center;
     gap: 1rem;
     min-height: 100vh;
-    background-image:
-            linear-gradient(rgba(242, 140, 40, 0.05) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(242, 140, 40, 0.05) 1px, transparent 1px);
+    background-image: var(--blueprint-grid);
     background-size: 24px 24px;
 }
 
@@ -324,4 +327,49 @@ img {
 
 body:has(.project-modal-backdrop) {
     overflow: hidden;
+}
+
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: fit-content;
+    margin: 0 auto 2.5rem;
+    padding: 0.6rem 1.5rem;
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.section-title::before {
+    content: "";
+    flex-shrink: 0;
+    width: 1.1em;
+    height: 1.1em;
+    background: url("../favicon.svg") center / contain no-repeat;
+    transition: transform 0.4s ease;
+}
+
+.section-title:hover::before {
+    transform: rotate(90deg);
+}
+
+.panel {
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    background-color: var(--color-surface);
+    background-image: var(--blueprint-grid);
+    background-size: 24px 24px;
+    border: 1px solid var(--color-border);
+    border-top: 2px solid var(--color-accent);
+    clip-path: polygon(
+            var(--chamfer) 0, 100% 0,
+            100% calc(100% - var(--chamfer)), calc(100% - var(--chamfer)) 100%,
+            0 100%, 0 var(--chamfer)
+    );
 }

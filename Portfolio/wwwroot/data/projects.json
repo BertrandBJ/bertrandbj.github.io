@@ -58,7 +58,7 @@
   },
   {
     "slug": "plateforme-rh",
-    "title": "Plateforme d'enquêtes RH",
+    "title": "YouRHway",
     "period": "2026",
     "status": "Done",
     "role": "Scrum Master",
@@ -82,6 +82,15 @@
         "title": "Difficulté et solution",
         "text": "L'équipe précédente avait abandonné les migrations Prisma : il fallait synchroniser à la main un script SQL et le schéma Prisma à chaque évolution de la base."
       }
+    ],
+    "images": [
+      
+      {"path": "images/projects/YourRHway/YouRHway.webp", "alt": "logo de l'entreprise YouRHway"},
+      {"path": "images/projects/YourRHway/image_RH1.webp", "alt": "Page de gestion des questions pour les enquêtes RH"},
+      {"path": "images/projects/YourRHway/image_RH2.webp", "alt": "Page de création d'utilisateur"},
+      {"path": "images/projects/YourRHway/Image_RH3.webp", "alt": "Page d'affichage des utilisateur d'un site d'entreprise"},
+      { "path": "images/projects/YourRHway/structure.webp", "alt": "architecture application"}
+      
     ],
     "technologies": ["TypeScript", "Next.js", "NestJS", "PostgreSQL", "Prisma", "Docker"],
     "order": 3
@@ -107,6 +116,15 @@
         "text": "Je l'ai entièrement codé sans assistant IA. C'était plus lent, mais c'est ce qui m'a donné des bases solides : comprendre ce que fait chaque ligne, plutôt que de la faire générer."
       }
     ],
+    "images": [
+
+      {"path": "images/projects/HoplaCup/logo_hopla.webp", "alt": "logo de la hoplaCup"},
+      {"path": "images/projects/HoplaCup/image_hopla1.webp", "alt": "Page menu gestion partie administrateur"},
+      {"path": "images/projects/HoplaCup/image_hopla2.webp", "alt": "page de notification pour l'administrateur"},
+      {"path": "images/projects/HoplaCup/image_hopla3.webp", "alt": "Page de gestion des équipes pour les utilisateurs"},
+      { "path": "images/projects/HoplaCup/image_hopla4.webp", "alt": "architecture BBD"}
+
+    ],
     "technologies": ["PHP", "JavaScript", "HTML/CSS", "WordPress", "SQL"],
     "order": 4
   },
@@ -127,6 +145,12 @@
         "title": "Comment fonctionne un mod Factorio",
         "text": "Le jeu charge le mod en deux temps. Pendant la phase data, on déclare les objets, les recettes et les technologies (des « prototypes »). Pendant la phase control, des scripts réagissent aux événements de la partie. S'ajoutent les fichiers de traduction et un manifeste (info.json)."
       }
+    ],
+
+    "images": [
+
+      {"path": "images/projects/Braintorio/logo_Brain.webp", "alt": "logo de Braintorio"}
+      
     ],
     "technologies": ["Lua", "API de modding Factorio"],
     "order": 5
