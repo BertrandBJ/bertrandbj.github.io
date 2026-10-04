@@ -22,6 +22,8 @@
     --content-width: 72rem;
     --header-height: 4rem;
     --chamfer: 12px;
+    --blazor-load-percentage: 0%;
+    --blazor-load-percentage-text: "";
 }
 
                                         /* =========================================================
@@ -124,38 +126,102 @@ img {
     cursor: pointer;
 }
 
-.loading-progress {
-    position: relative;
-    display: block;
-    width: 8rem;
-    height: 8rem;
-    margin: 20vh auto 1rem auto;
+/* Logo factorio-like ? :D*/
+                                            
+.boot-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    min-height: 100vh;
+    background-image:
+            linear-gradient(rgba(242, 140, 40, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(242, 140, 40, 0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
 }
 
-.loading-progress circle {
+.boot-gears {
+    width: 9rem;
+    color: var(--color-accent);
+}
+
+.gear {
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.gear-large {
+    animation: gear-spin 4s linear infinite;
+}
+
+.gear-small {
+    color: var(--color-text-muted);
+    animation: gear-spin-reverse 2.4s linear infinite;
+}
+
+.gear-teeth {
     fill: none;
-    stroke: var(--color-border);
-    stroke-width: 0.6rem;
-    transform-origin: 50% 50%;
-    transform: rotate(-90deg);
+    stroke: currentColor;
+    stroke-width: 8;
 }
 
-.loading-progress circle:last-child {
-    stroke: var(--color-accent);
-    stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
-    transition: stroke-dasharray 0.05s ease-in-out;
+.gear-body {
+    fill: currentColor;
 }
 
-.loading-progress-text {
-    position: absolute;
-    inset: calc(20vh + 3.25rem) 0 auto 0.2rem;
-    text-align: center;
+.gear-hole {
+    fill: var(--color-bg);
+}
+
+.boot-name {
+    margin: 0;
+    color: var(--color-text);
     font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
 }
 
-.loading-progress-text::after {
-    content: var(--blazor-load-percentage-text, "Chargement");
+.boot-bar {
+    width: 12rem;
+    height: 2px;
+    background: var(--color-border);
 }
+
+.boot-bar::after {
+    content: "";
+    display: block;
+    width: var(--blazor-load-percentage, 0%);
+    height: 100%;
+    background: var(--color-accent);
+    transition: width 0.1s ease-out;
+}
+
+.boot-status {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.boot-percent::after {
+    content: var(--blazor-load-percentage-text, "");
+}
+
+@keyframes gear-spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes gear-spin-reverse {
+    to { transform: rotate(-360deg); }
+}
+
+
+
+
 
                                             /* =========================================================
                                                                  Composants globaux

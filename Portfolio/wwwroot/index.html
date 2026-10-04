@@ -23,20 +23,57 @@
 
 <body>
     <div id="app">
-        <svg class="loading-progress">
+        
+        <div class="boot-screen">
             
-            <circle 
-                    r="40%"
-                    cx="50%" 
-                    cy="50%" />
-            
-            <circle 
-                    r="40%" 
-                    cx="50%" 
-                    cy="50%" />
-            
-        </svg>
-        <div class="loading-progress-text"></div>
+            <svg class="boot-gears"
+                 viewBox="0 0 110 80" 
+                 aria-hidden="true">
+                
+                <g class="gear gear-large">
+                    <circle class="gear-teeth" 
+                            cx="36"
+                            cy="44"
+                            r="22" 
+                            stroke-dasharray="7 6.82" />
+                    
+                    <circle class="gear-body"
+                            cx="36"
+                            cy="44"
+                            r="19" />
+                    
+                    <circle class="gear-hole"
+                            cx="36" 
+                            cy="44"
+                            r="6" />
+                    
+                </g>
+                
+                <g class="gear gear-small">
+                    
+                    <circle class="gear-teeth"
+                            cx="69"
+                            cy="30"
+                            r="13" 
+                            stroke-dasharray="7 6.6" />
+                    
+                    <circle class="gear-body"
+                            cx="69"
+                            cy="30"
+                            r="10" />
+                    
+                    <circle class="gear-hole"
+                            cx="69"
+                            cy="30"
+                            r="3.5" />
+                    
+                </g>
+            </svg>
+    
+            <p class="boot-name">Bertrand Beaujard</p>
+            <div class="boot-bar"></div>
+            <p class="boot-status">Chargement <span class="boot-percent"></span></p>
+        </div>
     </div>
 
     <div id="blazor-error-ui">
