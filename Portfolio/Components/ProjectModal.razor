@@ -1,4 +1,5 @@
 <div class="project-modal-backdrop" @onclick="RequestClose">
+    
     <div class="project-modal"
          role="dialog"
          aria-modal="true"
@@ -9,8 +10,8 @@
          @onkeydown="HandleKeyDown">
 
         <button class="project-modal-close"
-                type="button" 
-                aria-label="Fermer" 
+                type="button"
+                aria-label="Fermer"
                 @onclick="RequestClose">×</button>
 
         <header>
@@ -30,9 +31,9 @@
             <div class="project-modal-gallery">
                 @foreach (var image in Project.Images)
                 {
-                    <img src="@image.Path" 
-                         alt="@image.Alt" 
-                         loading="lazy" />
+                    <img src="@image.Path"
+                         alt="@image.Alt"
+                         loading="lazy"/>
                 }
             </div>
         }
@@ -64,22 +65,22 @@
             <ul class="project-techs">
                 @foreach (var tech in Project.Technologies)
                 {
-                    <li><TechBadge Name="@tech" /></li>
+                    <li><TechBadge Name="@tech"/></li>
                 }
             </ul>
         </section>
 
         @if (Project.RepoUrl is not null)
         {
-            <a class="button button-primary" 
-               href="@Project.RepoUrl" 
+            <a class="button button-primary"
+               href="@Project.RepoUrl"
                target="_blank" rel="noopener">Voir le code</a>
         }
         @if (Project.LiveUrl is not null)
         {
-            <a class="button button-secondary" 
-               href="@Project.LiveUrl" 
-               target="_blank" 
+            <a class="button button-secondary"
+               href="@Project.LiveUrl"
+               target="_blank"
                rel="noopener">Voir le site</a>
         }
 

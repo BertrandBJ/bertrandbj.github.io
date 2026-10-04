@@ -81,6 +81,7 @@
 </section>
 
 <section id="competences">
+    
     <p class="section-label">03 / Compétences</p>
     <h2>Compétences</h2>
 
@@ -101,18 +102,29 @@
 </section>
 
 <section id="contact">
+    
     <p class="section-label">04 / Contact</p>
     <h2>Contact</h2>
-    <p>Vous cherchez un stagiaire .NET, ou sur un autre langage ou framework, pour janvier 2027 ? Écrivez-moi.</p>
-    <ul>
-        <li><a href="mailto:bertrand.beaujard@gmail.com">bertrand.beaujard@gmail.com</a></li>
-        <li><a href="https://github.com/BertrandBJ" target="_blank" rel="noopener">GitHub</a></li>
-    </ul>
 
-    @if (_selectedProject is not null)
-    {
-        <ProjectModal @key="_selectedProject.Slug"
-                      Project="@_selectedProject"
-                      OnClose="CloseModal"/>
-    }
+    <div class="contact-panel">
+        <p>Vous cherchez un stagiaire .NET, ou sur un autre langage ou framework, pour janvier 2027 ? Écrivez-moi.</p>
+
+        <div class="contact-actions">
+            <a class="button button-primary"
+               href="mailto:bertrand.beaujard@gmail.com">Envoyer un e-mail</a>
+
+            <a class="button button-secondary"
+               href="https://github.com/BertrandBJ" target="_blank" rel="noopener">GitHub</a>
+        </div>
+
+        <p class="contact-email">bertrand.beaujard@gmail.com</p>
+        
+    </div>
 </section>
+
+@if (_selectedProject is not null)
+{
+    <ProjectModal @key="_selectedProject.Slug"
+                  Project="@_selectedProject"
+                  OnClose="CloseModal" />
+}

@@ -24,7 +24,7 @@
         "text": "En fin de projet, une partie du code s'écartait des conventions du socle imposé. Je l'ai reprise pour la remettre en conformité, afin que l'application reste maintenable par les équipes de l'entreprise."
       }
     ],
-    "technologies": [".NET 8", "Blazor WebAssembly", "ASP.NET Core", "Entity Framework Core", "SQL Server"],
+    "technologies": [".NET 8 ", "Blazor WebAssembly", "ASP.NET Core", "Entity Framework Core", "SQL Server"],
     "order": 1
   },
   {

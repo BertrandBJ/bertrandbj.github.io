@@ -52,3 +52,25 @@
     color: var(--color-accent);
     text-decoration: none;
 }
+
+@media (max-width: 40rem) {
+    .site-nav {
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.4rem;
+        padding: 0 1rem;
+    }
+
+    .site-nav-links {
+        flex-wrap: nowrap;
+        gap: 1rem;
+        max-width: 100%;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .site-nav-links a {
+        font-size: 0.75rem;
+        white-space: nowrap;
+    }
+}
