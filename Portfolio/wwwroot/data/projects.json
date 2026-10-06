@@ -24,6 +24,11 @@
         "text": "En fin de projet, une partie du code s'écartait des conventions du socle imposé. Je l'ai reprise pour la remettre en conformité, afin que l'application reste maintenable par les équipes de l'entreprise."
       }
     ],
+    "images": [
+
+      {"path": "images/projects/SCHMIDT/schmidt-architecture.webp", "alt": "représentation de l'architecture de l'application schmidt"},
+      {"path": "images/projects/SCHMIDT/schmidt-architecture-in.webp", "alt": "représentation de l'architecture de l'application schmidt"}
+      ],
     "technologies": [".NET 8 ", "Blazor WebAssembly", "ASP.NET Core", "Entity Framework Core", "SQL Server"],
     "order": 1
   },
@@ -52,6 +57,11 @@
         "title": "La démarche",
         "text": "Conception d'abord : cahier des charges, diagrammes UML, user stories et maquettes. Puis tests d'intégration pour chaque user story, pipeline CI/CD et authentification par token avec protection des routes."
       }
+    ],
+    "images": [
+
+      {"path": "images/projects/TMS2000/tms2000-logo.webp", "alt": "logo de tms2000, trade master simulation 2000"},
+      {"path": "images/projects/TMS2000/tms2000-architecture.webp", "alt": "représentation de l'architecture de l'application tms2000"}
     ],
     "technologies": [".NET MAUI", "C#", "ASP.NET Core", "MongoDB", "SQLite", "Docker", "GitLab CI/CD"],
     "order": 2
