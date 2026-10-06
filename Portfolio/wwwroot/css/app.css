@@ -239,7 +239,9 @@ img {
 }
 
 .button {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     padding: 0.75rem 1.5rem;
     border: 1px solid var(--color-accent);
     font-family: var(--font-mono);
@@ -372,4 +374,8 @@ body:has(.project-modal-backdrop) {
             100% calc(100% - var(--chamfer)), calc(100% - var(--chamfer)) 100%,
             0 100%, 0 var(--chamfer)
     );
+}
+
+.icon {
+    flex-shrink: 0;
 }
