@@ -22,6 +22,8 @@ public partial class Home
     private NavigationManager Navigation { get; set; } = null!;
     
     private bool _projectCardsObserved;
+    
+    private bool _revealStarted;
 
     private IReadOnlyList<Project>? _projects;
     
@@ -53,6 +55,7 @@ public partial class Home
     protected override async Task OnInitializedAsync()
     {
         _projects = await ProjectService.GetAllAsync();
+        
     }
 
     protected override async Task OnParametersSetAsync()
@@ -92,15 +95,10 @@ public partial class Home
             await JS.InvokeVoidAsync("portfolioScroll.restoreY", y);
         }
         
-        if (firstRender)
+        if (_projects is not null && !_revealStarted)
         {
+            _revealStarted = true;
             await JS.InvokeVoidAsync("portfolioEffects.initReveal");
-        }
-
-        if (_projects is not null && !_projectCardsObserved) // !_stuff => same as _stuff == false. 
-        {
-            _projectCardsObserved = true;
-            await JS.InvokeVoidAsync("portfolioEffects.observeReveal");
         }
     }
 

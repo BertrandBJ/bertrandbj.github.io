@@ -1,39 +1,48 @@
-                                    // =============================================================//
-                                    //  Position de défilement (ouverture / fermeture de la modale)=//
-                                    // =============================================================//
-                                    
-                                    
+                                        // =============================================================//
+                                        //  Position de défilement (ouverture / fermeture de la modale) //
+                                        // =============================================================//
+
+
 window.portfolioScroll = {
     getY: () => window.scrollY,
     restoreY: (y) => window.scrollTo({ top: y, behavior: "instant" })
 };
 
 
-                                            // =========================================================//
-                                            //              Apparition des éléments au scroll           //
-                                            // =========================================================//
+                                        // =========================================================//
+                                        //               Allumage des néons au scroll, c'est sexy
+                                        // =========================================================//
 
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches; // c'est un paramètre selected par l'utilisateur sur sa machine, on le stock ici dans reduceMotion.
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches; // c'est un paramètre choisi par l'utilisateur sur sa machine, on le stocke ici dans reduceMotion.
 
 // Posée dès le chargement du script, avant que Blazor affiche quoi que ce soit,
 // pour éviter que les sections s'affichent une fraction de seconde puis disparaissent
-                                    
-                                    
-if (!reduceMotion) { // => si y'a pas le reduceMotion, aka => c'est bon tu peux faire des motions ajoute js-reveal à la <html>
+                                        
+if (!reduceMotion) { // => s'il n'y a pas de reduceMotion, aka => c'est bon, tu peux faire des animations : ajoute js-reveal à <html>
     document.documentElement.classList.add("js-reveal"); // documentElement => c'est <html>.
 }
 
-let revealObserver = null; // creation de l'observer, enfin réservation. comme l'element à obs n'existe pas encore il est vide initialy.
+setTimeout(() => { // active tout si jamais l'annimation fonctionne pas
+    if (revealObserver === null) {
+        document.documentElement.classList.remove("js-reveal");
+    }
+}, 5000);
+
+let revealObserver = null; // création de l'observer, enfin réservation. Comme les éléments à observer n'existent pas encore, il est vide au départ.
+
+const IGNITION_GAP_MS = 280; // écart entre deux allumages successifs, en ms.
+let nextIgnition = 0;        // moment (en ms depuis le chargement de la page) où le prochain tube pourra s'allumer => c'est la file d'attente.
+const MAX_WAIT_MS = 600;
 
 window.portfolioEffects = {
 
-    initReveal: function () { // ici initreveal c'est une clé, et la fonction la valeur. Donc on a bien des duos clé-valeurs.
+    initReveal: function () { // ici initReveal c'est une clé, et la fonction la valeur. Donc on a bien des duos clé-valeur.
         if (reduceMotion) {
             return;
         }
 
-        revealObserver = new IntersectionObserver(onReveal, { // là du coup IntersectionObserver c'est un truc dispo en JS sur tout les navigateur, comme document ou d'autre truc trrès standard. Alors attention c'est EN JS.//
-            rootMargin: "0px 0px -10% 0px" // ROOT = tout l'écran btw, donc ici on lui dit avec 10% de margin en bas pour la zone de detection. quand l'object rentre dans la zone de detection => go lancer on reveal.
+        revealObserver = new IntersectionObserver(onReveal, { // IntersectionObserver c'est un truc dispo en JS sur tous les navigateurs, comme document ou d'autres trucs très standard. Attention, c'est EN JS.
+            rootMargin: "0px 0px -10% 0px" // ROOT = tout l'écran btw. Ici on rétrécit la zone de détection de 10 % en bas. Quand l'objet entre dans la zone de détection => go lancer onReveal.
         });
 
         window.portfolioEffects.observeReveal();
@@ -52,17 +61,20 @@ window.portfolioEffects = {
     }
 };
 
-function onReveal(entries, observer) { // en JS on peut create les functions après, même si on les appels avant. (elles sont remontées en haut). 
-    let delayIndex = 0;
+function onReveal(entries, observer) { // en JS on peut créer les fonctions après, même si on les appelle avant (elles sont remontées en haut).
+    const now = performance.now(); // horloge du navigateur : ms écoulées depuis le chargement de la page.
 
     for (const entry of entries) {
-        if (!entry.isIntersecting) { // => true si l'élement est dans la zone de détection ? en gros cela fait  : IF l'élement n'est pas à l'écran, go next element.
+        if (!entry.isIntersecting) {
             continue;
         }
-        // si l'element est à l'écran ici// => 
-        entry.target.style.animationDelay = `${delayIndex * 80}ms`; // ici target est l'element étudié dans la boucle actuellement, si y'en a plusieurs (aka il fait plusieurs loop) => le delayindex incrémente de 1 et on up de 80ms à chaque loop.
-        entry.target.classList.add("is-visible"); 
-        observer.unobserve(entry.target); // on unobserve la target de la boucle, elle est déjà "affiché".
-        delayIndex++;
+
+        const start = Math.max(now, Math.min(nextIgnition, now + MAX_WAIT_MS));// tout de suite si personne n'attend, sinon après le dernier tube de la file.
+
+        entry.target.style.setProperty("--reveal-delay", `${Math.round(start - now)}ms`); // variable CSS => lue à la fois par le panneau et par son ::before.
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+
+        nextIgnition = start + IGNITION_GAP_MS; // le prochain tube devra attendre son tour.
     }
 }

@@ -2,32 +2,40 @@
 @page "/projets/{Slug}"
 
 <PageTitle>@PageTitleText</PageTitle>
+<div class="hero-screen">
+    <header class="hero reveal">
+        <p class="section-label">Portfolio</p>
+        <h1>Bertrand Beaujard</h1>
+        <p class="hero-title">Développeur full stack C# / .NET en formation</p>
+        <p class="hero-subtitle">
+            Licence professionnelle à l'UHA 4.0, Mulhouse · Recherche un stage de 6 mois à partir de janvier 2027
+        </p>
 
-<header class="hero">
-    <p class="section-label">Portfolio</p>
-    <h1>Bertrand Beaujard</h1>
-    <p class="hero-title">Développeur full stack C# / .NET en formation</p>
-    <p class="hero-subtitle">
-        Licence professionnelle à l'UHA 4.0, Mulhouse · Recherche un stage de 6 mois à partir de janvier 2027
-    </p>
+        <ul class="hero-techs">
+            @foreach (var tech in HeroTechnologies)
+            {
+                <li><TechBadge Name="@tech"/></li>
+            }
+        </ul>
 
-    <ul class="hero-techs">
-        @foreach (var tech in HeroTechnologies)
-        {
-            <li><TechBadge Name="@tech"/></li>
-        }
-    </ul>
+        <div class="hero-actions">
 
-    <div class="hero-actions">
+            <a class="button button-primary"
+               href="#projets">Voir mes projets</a>
 
-        <a class="button button-primary"
-           href="#projets">Voir mes projets</a>
-
-        <a class="button button-secondary"
-           href="#contact">Me contacter</a>
-    </div>
-</header>
-
+            <a class="button button-secondary"
+               href="#contact">Me contacter</a>
+        </div>
+    </header>
+    
+    <a class="scroll-cue"
+       href="#a-propos"
+       aria-label="Défiler vers la section À propos">
+        <span class="scroll-cue-arrow" 
+              aria-hidden="true">↓</span>
+        
+    </a>
+</div>
 <section id="a-propos">
     <h2 class="section-title">À propos</h2>
     
@@ -86,10 +94,10 @@
     
     <h2 class="section-title">Compétences</h2>
 
-    <div class="skill-groups reveal">
+    <div class="skill-groups">
         @foreach (var group in SkillGroups)
         {
-            <div class="skill-group">
+            <div class="skill-group reveal">
                 <h3>@group.Category</h3>
                 <ul>
                     @foreach (var skill in group.Skills)
