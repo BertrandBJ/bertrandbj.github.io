@@ -33,7 +33,8 @@ let revealObserver = null; // création de l'observer, enfin réservation. Comme
 const IGNITION_GAP_MS = 280; // écart entre deux allumages successifs, en ms.
 let nextIgnition = 0;        // moment (en ms depuis le chargement de la page) où le prochain tube pourra s'allumer => c'est la file d'attente.
 const MAX_WAIT_MS = 600;
-
+const SETTLE_DELAY_MS = 200; // delay used pour éviter que les animations glitch à l'opening à cause de lag ou autre.
+                                        
 window.portfolioEffects = {
 
     initReveal: function () { // ici initReveal c'est une clé, et la fonction la valeur. Donc on a bien des duos clé-valeur.
@@ -45,7 +46,7 @@ window.portfolioEffects = {
             rootMargin: "0px 0px -10% 0px" // ROOT = tout l'écran btw. Ici on rétrécit la zone de détection de 10 % en bas. Quand l'objet entre dans la zone de détection => go lancer onReveal.
         });
 
-        window.portfolioEffects.observeReveal();
+        whenPageIsPainted(() => window.portfolioEffects.observeReveal());
     },
 
     observeReveal: function () {
@@ -77,4 +78,12 @@ function onReveal(entries, observer) { // en JS on peut créer les fonctions apr
 
         nextIgnition = start + IGNITION_GAP_MS; // le prochain tube devra attendre son tour.
     }
+}
+
+function whenPageIsPainted(callback) { // attend que le navigateur ait vraiment dessiné la page, puis laisse-lui un petit temps.
+    requestAnimationFrame(() => {       // juste avant la prochaine image (N)...
+        requestAnimationFrame(() => {   // ...puis juste avant la suivante (N+1) : l'image N est donc bien à l'écran.
+            setTimeout(callback, SETTLE_DELAY_MS);
+        });
+    });
 }
