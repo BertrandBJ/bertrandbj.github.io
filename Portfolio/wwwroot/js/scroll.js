@@ -1,24 +1,25 @@
-                                        // =============================================================//
-                                        //  Position de défilement (ouverture / fermeture de la modale) //
-                                        // =============================================================//
-
-
+// used to grab Y on the page, allowing C# modal to keep the same background position//
 window.portfolioScroll = {
     getY: () => window.scrollY,
     restoreY: (y) => window.scrollTo({ top: y, behavior: "instant" })
 };
 
 
-                                        // =========================================================//
-                                        //               Allumage des néons au scroll, c'est sexy
-                                        // =========================================================//
+// =========================================================//
+//               Allumage des néons au scroll, c'est sexy   //
+// =========================================================//
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches; // c'est un paramètre choisi par l'utilisateur sur sa machine, on le stocke ici dans reduceMotion.
+
+// if hover : none  (pas de souris) et pointer grossier => c'est un phone ou tablette.
+const isTouchDevice = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+const effectsDisabled = reduceMotion || isTouchDevice;
 
 // Posée dès le chargement du script, avant que Blazor affiche quoi que ce soit,
 // pour éviter que les sections s'affichent une fraction de seconde puis disparaissent
                                         
-if (!reduceMotion) { // => s'il n'y a pas de reduceMotion, aka => c'est bon, tu peux faire des animations : ajoute js-reveal à <html>
+if (!effectsDisabled) { // => s'il n'y a pas de reduceMotion, aka => c'est bon, tu peux faire des animations : ajoute js-reveal à <html>
     document.documentElement.classList.add("js-reveal"); // documentElement => c'est <html>.
 }
 
@@ -28,17 +29,23 @@ setTimeout(() => { // active tout si jamais l'annimation fonctionne pas
     }
 }, 5000);
 
-let revealObserver = null; // création de l'observer, enfin réservation. Comme les éléments à observer n'existent pas encore, il est vide au départ.
-
-const IGNITION_GAP_MS = 280; // écart entre deux allumages successifs, en ms.
-let nextIgnition = 0;        // moment (en ms depuis le chargement de la page) où le prochain tube pourra s'allumer => c'est la file d'attente.
+let revealObserver = null;
+// création de l'observer, enfin réservation. Comme les éléments à observer n'existent pas encore, il est vide au départ.
+const IGNITION_GAP_MS = 280; 
+// écart entre deux allumages successifs, en ms.
+let nextIgnition = 0;        
+// moment (en ms depuis le chargement de la page) où le prochain tube pourra s'allumer => c'est la file d'attente.
 const MAX_WAIT_MS = 600;
-const SETTLE_DELAY_MS = 200; // delay used pour éviter que les animations glitch à l'opening à cause de lag ou autre.
+const SETTLE_DELAY_MS = 200;
+// delay used pour éviter que les animations glitch à l'opening à cause de lag ou autre.
+
                                         
+                                        
+
 window.portfolioEffects = {
 
     initReveal: function () { // ici initReveal c'est une clé, et la fonction la valeur. Donc on a bien des duos clé-valeur.
-        if (reduceMotion) {
+        if (effectsDisabled) {
             return;
         }
 
