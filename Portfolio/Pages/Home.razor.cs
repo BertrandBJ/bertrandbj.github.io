@@ -11,7 +11,7 @@ public partial class Home
     public string? Slug { get; set; }
     
     [Inject]
-    private IJSRuntime JS { get; set; } = null!;
+    private IJSRuntime JS { get; set; } = null!; // ah mais voila, il est là le runner JS, c'est ça qui va me permettre de pouvoir manipuler des scripts JS depuis C#.
 
     private double? _scrollToRestore;
 
@@ -20,6 +20,8 @@ public partial class Home
 
     [Inject]
     private NavigationManager Navigation { get; set; } = null!;
+    
+    private bool _projectCardsObserved;
 
     private IReadOnlyList<Project>? _projects;
     
@@ -88,6 +90,17 @@ public partial class Home
             double y = _scrollToRestore.Value;
             _scrollToRestore = null;
             await JS.InvokeVoidAsync("portfolioScroll.restoreY", y);
+        }
+        
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("portfolioEffects.initReveal");
+        }
+
+        if (_projects is not null && !_projectCardsObserved) // !_stuff => same as _stuff == false. 
+        {
+            _projectCardsObserved = true;
+            await JS.InvokeVoidAsync("portfolioEffects.observeReveal");
         }
     }
 
