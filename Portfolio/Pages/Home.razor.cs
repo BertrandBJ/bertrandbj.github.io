@@ -21,7 +21,6 @@ public partial class Home
     [Inject]
     private NavigationManager Navigation { get; set; } = null!;
     
-    private bool _projectCardsObserved;
     
     private bool _revealStarted;
 
