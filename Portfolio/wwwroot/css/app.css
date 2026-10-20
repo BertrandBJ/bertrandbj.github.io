@@ -25,6 +25,7 @@
     --content-width: 80rem;
     --header-height: 4rem;
     --chamfer: 12px;
+    --cat-play-duration: 3.2s; /* un cycle « la flèche descend, le chat la tape » : partagé par la flèche et le chat */
 
     /* Mises à jour par Blazor pendant le chargement */
     --blazor-load-percentage: 0%;
@@ -501,3 +502,28 @@ body:has(.project-modal-backdrop) {
     100% { --color-accent: #f28c28; }
 }
 
+                                            /* =========================================================
+                                                                       Chat noir
+                                               ========================================================= */
+.black-cat {
+    pointer-events: none;
+}
+
+/* Lueur orange ambiante, sur l'img et pas sur .black-cat : l'animation neon-light remplace le filter de .black-cat */
+.black-cat img {
+    display: block;
+    width: auto;
+    height: 100%;
+    filter: drop-shadow(0 0 10px rgba(242, 140, 40, 0.25));
+}
+
+/* Le chat est le voisin de son panneau, pas son enfant : il n'hérite pas de son allumage.
+   :has() regarde l'état du panneau depuis .cat-perch, et le chat rejoue le même clignotement,
+   avec le même délai (posé sur .cat-perch par scroll.js). */
+.js-reveal .cat-perch:has(> .reveal:not(.is-visible)) .black-cat {
+    filter: brightness(0.25);
+}
+
+.cat-perch:has(> .reveal.is-visible) .black-cat {
+    animation: neon-light 1.8s steps(1, end) var(--reveal-delay, 0ms) both;
+}

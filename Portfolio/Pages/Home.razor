@@ -3,31 +3,36 @@
 
 <PageTitle>@PageTitleText</PageTitle>
 <div class="hero-screen">
-    <header class="hero reveal">
-        <p class="section-label">Portfolio</p>
-        <h1>Bertrand Beaujard</h1>
-        <p class="hero-title">Développeur full stack C# / .NET en formation</p>
-        <p class="hero-subtitle">
-            Licence professionnelle à l'UHA 4.0, Mulhouse · Recherche un stage de 6 mois à partir de janvier 2027
-        </p>
+    <div class="cat-perch hero-perch">
+        <header class="hero reveal">
+            <p class="section-label">Portfolio</p>
+            <h1>Bertrand Beaujard</h1>
+            <p class="hero-title">Développeur full stack C# / .NET en formation</p>
+            <p class="hero-subtitle">
+                Licence professionnelle à l'UHA 4.0, Mulhouse · Recherche un stage de 6 mois à partir de janvier 2027
+            </p>
 
-        <ul class="hero-techs">
-            @foreach (var tech in HeroTechnologies)
-            {
-                <li><TechBadge Name="@tech"/></li>
-            }
-        </ul>
+            <ul class="hero-techs">
+                @foreach (var tech in HeroTechnologies)
+                {
+                    <li><TechBadge Name="@tech"/></li>
+                }
+            </ul>
 
-        <div class="hero-actions">
+            <div class="hero-actions">
 
-            <a class="button button-primary"
-               href="#projets">Voir mes projets</a>
+                <a class="button button-primary"
+                   href="#projets">Voir mes projets</a>
 
-            <a class="button button-secondary"
-               href="#contact">Me contacter</a>
-        </div>
-    </header>
-    
+                <a class="button button-secondary"
+                   href="#contact">Me contacter</a>
+            </div>
+        </header>
+
+        @* Hors du header : son clip-path couperait le chat qui dépasse au-dessus *@
+        <SittingCat />
+    </div>
+
     <a class="scroll-cue"
        href="#a-propos"
        aria-label="Défiler vers la section À propos">
@@ -37,7 +42,12 @@
     </a>
 </div>
 <section id="a-propos">
-    <h2 class="section-title">À propos</h2>
+    <div class="title-perch">
+        <h2 class="section-title">À propos</h2>
+
+        @* Hors du h2 : son clip-path couperait le chat couché dessus *@
+        <LoungingCat />
+    </div>
     
     <div class="panel about-panel reveal">
     
@@ -84,7 +94,18 @@
         <div class="project-grid">
             @foreach (var project in _projects)
             {
-                <ProjectCard @key="project.Slug" Project="@project"/>
+                if (project == ScratchingPostProject)
+                {
+                    @* Même principe que le hero : le chat est à côté de la carte, pas dedans (clip-path) *@
+                    <div class="cat-perch scratching-perch" @key="project.Slug">
+                        <ProjectCard Project="@project"/>
+                        <StretchingCat />
+                    </div>
+                }
+                else
+                {
+                    <ProjectCard @key="project.Slug" Project="@project"/>
+                }
             }
         </div>
     }
@@ -113,30 +134,36 @@
 <section id="contact">
     <h2 class="section-title">Contact</h2>
 
-    <div class="contact-panel reveal">
-        <p>Vous cherchez un stagiaire .NET, ou sur un autre langage ou framework, pour janvier 2027 ? Écrivez-moi.</p>
+    <div class="cat-perch contact-perch">
+        <div class="contact-panel reveal">
+            <p>Vous cherchez un stagiaire .NET, ou sur un autre langage ou framework, pour janvier 2027 ? Écrivez-moi.</p>
 
-        <div class="contact-actions">
-            <a class="button button-primary"
-               href="mailto:bertrand.beaujard@gmail.com">Envoyer un e-mail</a>
+            <div class="contact-actions">
+                <a class="button button-primary"
+                   href="mailto:bertrand.beaujard@gmail.com">Envoyer un e-mail</a>
 
-            <a class="button button-secondary"
-               href="https://github.com/BertrandBJ" 
-               target="_blank" 
-               rel="noopener">GitHub</a>
+                <a class="button button-secondary"
+                   href="https://github.com/BertrandBJ" 
+                   target="_blank" 
+                   rel="noopener">GitHub</a>
             
-            <a class="button button-secondary" 
-               href="https://www.linkedin.com/in/bertrand-beaujard/" 
-               rel="noopener">Linkedin</a>
+                <a class="button button-secondary" 
+                   href="https://www.linkedin.com/in/bertrand-beaujard/" 
+                   target = "_blank"
+                   download>Linkedin</a>
             
-            <a class="button button-secondary" 
-               href="files/CV_Bertrand_Beaujard.pdf" 
-               download><DownloadIcon />mon CV</a>
+                <a class="button button-secondary" 
+                   href="files/CV_Bertrand_Beaujard.pdf" 
+                   download><DownloadIcon />mon CV</a>
             
+            </div>
+
+            <p class="contact-email">bertrand.beaujard@gmail.com</p>
+        
         </div>
 
-        <p class="contact-email">bertrand.beaujard@gmail.com</p>
-        
+        @* Hors du panneau : son clip-path couperait le chat qui dépasse au-dessus *@
+        <SleepingCat />
     </div>
 </section>
 

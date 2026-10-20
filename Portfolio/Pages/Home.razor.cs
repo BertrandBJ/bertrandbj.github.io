@@ -28,6 +28,10 @@ public partial class Home
     
     private Project? _selectedProject;
 
+    // Le chat qui fait ses griffes se met sur la première carte : c'est toujours celle en haut à gauche,
+    // la seule qui a de la place à sa gauche, quel que soit l'ordre des projets dans le JSON.
+    private Project? ScratchingPostProject => _projects?.FirstOrDefault();
+
     private string PageTitleText => _selectedProject is null
         ? "Bertrand Beaujard – Développeur full stack C# / .NET"
         : $"{_selectedProject.Title} – Bertrand Beaujard";

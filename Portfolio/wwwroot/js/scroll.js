@@ -79,7 +79,9 @@ function onReveal(entries, observer) { // en JS on peut créer les fonctions apr
 
         const start = Math.max(now, Math.min(nextIgnition, now + MAX_WAIT_MS));// tout de suite si personne n'attend, sinon après le dernier tube de la file.
 
-        entry.target.style.setProperty("--reveal-delay", `${Math.round(start - now)}ms`); // variable CSS => lue à la fois par le panneau et par son ::before.
+        const revealDelay = `${Math.round(start - now)}ms`;
+        entry.target.style.setProperty("--reveal-delay", revealDelay); // variable CSS => lue à la fois par le panneau et par son ::before.
+        entry.target.closest(".cat-perch")?.style.setProperty("--reveal-delay", revealDelay); // si un chat est perché sur ce panneau, il s'allume en même temps que lui.
         entry.target.classList.add("is-visible");
         observer.unobserve(entry.target);
 

@@ -1,6 +1,5 @@
 
 .hero {
-    align-self: center;
     padding: clamp(2rem, 6vw, 4rem);
     background-color: var(--color-surface);
     background-image: var(--blueprint-grid);
@@ -76,17 +75,18 @@
     filter: brightness(1.3);
 }
 
-/* Sans courant tant que le hero n'est pas allumé */
-.js-reveal .hero:not(.is-visible) ~ .scroll-cue .scroll-cue-arrow {
+/* Sans courant tant que le hero n'est pas allumé
+   (le hero est dans .hero-perch, donc on passe par :has() pour remonter jusqu'au voisin de la flèche) */
+.js-reveal .hero-perch:has(> .hero:not(.is-visible)) ~ .scroll-cue .scroll-cue-arrow {
     color: #7a4a1e;
     text-shadow: none;
 }
 
-/* Reçoit le courant au claquement du hero, puis se balance */
-.hero.is-visible ~ .scroll-cue .scroll-cue-arrow {
+/* Reçoit le courant au claquement du hero, puis se fait taper par le chat de « À propos » */
+.hero-perch:has(> .hero.is-visible) ~ .scroll-cue .scroll-cue-arrow {
     animation:
             arrow-power 1.8s steps(1, end) both,
-            cue-bob 1.8s ease-in-out 1.8s infinite;
+            arrow-batted var(--cat-play-duration) linear 1.8s infinite;
 }
 
 @keyframes arrow-power {
@@ -109,9 +109,121 @@
     }
 }
 
-@keyframes cue-bob {
-    0%, 100% { translate: 0 0; }
-    50%      { translate: 0 0.5rem; }
+/* La flèche descend doucement vers la patte, se fait renvoyer vers le haut, puis se stabilise.
+   Mêmes pourcentages que cat-swat : les deux animations partent au même moment et durent pareil. */
+@keyframes arrow-batted {
+    0%   { translate: 0 0;       rotate: 0deg;   animation-timing-function: ease-in-out; }
+    50%  { translate: 0 0.6rem;  rotate: 0deg;   animation-timing-function: cubic-bezier(0.2, 0.9, 0.3, 1); }
+    58%  { translate: 0 -0.5rem; rotate: -14deg; animation-timing-function: ease-in-out; }
+    75%  { translate: 0 0.1rem;  rotate: 5deg; }
+    88%  { translate: 0 0;       rotate: -2deg; }
+    100% { translate: 0 0;       rotate: 0deg; }
+}
+
+
+/* ---------- Chat perché ---------- */
+/* .cat-perch = un panneau + son chat. Le chat est à côté du panneau et pas dedans,
+   sinon le clip-path du panneau couperait tout ce qui dépasse. */
+.cat-perch {
+    position: relative;
+}
+
+.hero-perch {
+    --sitting-cat-height: clamp(10rem, 24vw, 19rem);
+    align-self: center;
+    /* Les pattes sont à ~70 % de la hauteur de l'image : on réserve cette hauteur au-dessus du hero,
+       le reste (la queue) pend devant le panneau. 0.69 plutôt que 0.70 pour que les pattes appuient sur le tube. */
+    padding-top: calc(var(--sitting-cat-height) * 0.69);
+}
+
+.hero-perch ::deep .sitting-cat {
+    position: absolute;
+    top: 0;
+    right: 4%;
+    z-index: 1;
+    height: var(--sitting-cat-height);
+    aspect-ratio: 3 / 5; /* ratio de l'image (480 × 800) : largeur fiable même si la place à droite se réduit */
+}
+
+/* Chat endormi sur le panneau contact, à droite comme celui du hero */
+.contact-perch {
+    --sleeping-cat-height: clamp(5.5rem, 12vw, 8rem);
+    --sleeping-cat-room: 0rem; /* sur grand écran, il loge à droite du titre centré : pas besoin de place en plus */
+    padding-top: var(--sleeping-cat-room);
+}
+
+/* Sur petit écran, le titre centré et le chat se superposeraient : on réserve sa hauteur
+   (moins les 2rem déjà offerts par la marge du titre) */
+@media (max-width: 48rem) {
+    .contact-perch {
+        --sleeping-cat-room: calc(var(--sleeping-cat-height) - 2rem);
+    }
+}
+
+.contact-perch ::deep .sleeping-cat {
+    position: absolute;
+    right: 6%;
+    z-index: 1;
+    height: var(--sleeping-cat-height);
+    aspect-ratio: 781 / 360;
+    /* Posé sur le tube : son ventre est arrondi, alors il s'enfonce de 3 % sous le bord, sinon les pattes flottent */
+    bottom: calc(100% - var(--sleeping-cat-room) - var(--sleeping-cat-height) * 0.03);
+}
+
+
+.title-perch {
+    --lounging-cat-height: 6.8rem; /* la patte tendue touche la pointe de la flèche quand elle est au plus bas */
+    position: relative;
+    width: fit-content;
+    margin: 0 auto 2.5rem;
+}
+
+.title-perch > .section-title {
+    margin: 0;
+}
+
+.title-perch ::deep .lounging-cat {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    height: var(--lounging-cat-height);
+    aspect-ratio: 755 / 420;
+    translate: -41.3% 0;
+    transform-origin: 41.3% 100%; /* s'étire depuis sous la patte : la patte monte sans glisser de côté */
+}
+
+/* Le coup de patte : démarre avec la flèche (même déclencheur, même délai, même durée) */
+.hero-screen:has(.hero.is-visible) ~ #a-propos ::deep .lounging-cat {
+    animation: cat-swat var(--cat-play-duration) ease-in-out 1.8s infinite;
+}
+
+@keyframes cat-swat {
+    0%, 42% { scale: 1 1; }
+    50%     { scale: 1 1.05; }  /* tend la patte quand la flèche arrive */
+    58%     { scale: 1 0.98; }  /* frappe */
+    72%, 100% { scale: 1 1; }
+}
+
+/* Chat qui fait ses griffes sur la première carte projet.
+   Il vit dans la marge à gauche de la grille : caché tant que cette marge est trop étroite pour lui. */
+.scratching-perch ::deep .stretching-cat {
+    display: none;
+    position: absolute;
+    right: 100%;
+    bottom: 0;
+    z-index: 1;
+    height: 11rem;
+    /* Sans ça, la largeur vaut 0 : avec right: 100%, il ne reste aucune place pour un absolute en shrink-to-fit,
+       et l'image en height: 100% se laisse écraser. Le ratio de l'image (300 × 600) fixe la largeur. */
+    aspect-ratio: 1 / 2;
+    /* Les pattes et les griffures (les 19 % de droite de l'image) mordent sur la carte */
+    translate: 19% 0;
+}
+
+@media (min-width: 88rem) {
+    .scratching-perch ::deep .stretching-cat {
+        display: block;
+    }
 }
 
 
